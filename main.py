@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import os
-
+from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 from aiogram.types import Message
@@ -11,8 +11,11 @@ import langid
 from googletrans import Translator
 
 translator = Translator()
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
+TOKEN = os.getenv('BOT_TOKEN')
+
 
 
 @dp.message(CommandStart())
@@ -44,7 +47,7 @@ async def tarjimon(message: types.Message):
 
 
 async def main():
-    bot = Bot('6962959911:AAHTASWE9zqY9hrVCU6qdHQac2f3ezIm9i8')
+    bot = Bot(TOKEN)
     await dp.start_polling(bot)
 
 
